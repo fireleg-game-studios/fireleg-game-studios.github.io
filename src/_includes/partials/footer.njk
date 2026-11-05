@@ -1,0 +1,36 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="needle" aria-hidden="true"></div>
+    <p class="site-footer__slogan">
+      {%- for line in site.slogan %}<span>{{ line }}</span> {% endfor -%}
+    </p>
+    <div class="site-footer__grid">
+      <div>
+        {% include "partials/brand.njk" %}
+        <p class="site-footer__intro">An independent video game studio building original worlds across genres.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h2 class="site-footer__heading">Explore</h2>
+        <ul class="site-footer__links">
+          {%- for item in site.nav %}
+          <li><a href="{{ item.href }}">{{ item.label }}</a></li>
+          {%- endfor %}
+        </ul>
+      </nav>
+      <div>
+        <h2 class="site-footer__heading">Connect</h2>
+        <ul class="site-footer__links">
+          <li><a href="/discord/">Join our Discord</a></li>
+          {%- for channel in site.social %}{% if channel.url %}
+          <li><a href="{{ channel.url }}" rel="noopener" target="_blank">{{ channel.label }}</a></li>
+          {%- endif %}{% endfor %}
+        </ul>
+      </div>
+    </div>
+    <p class="site-footer__status">{{ site.firstGame.title }} is still in development. Nothing shown on this site is final.</p>
+    <div class="site-footer__legal">
+      <p>&copy; {{ build.year }} {{ site.name }}. All rights reserved.</p>
+      <p><a href="#main">Back to top</a></p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,101 @@
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-space);
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+/* Interior page opening */
+.page-head {
+  position: relative;
+  isolation: isolate;
+  padding-block: calc(var(--header-h) + clamp(4rem, 13vh, 9rem)) clamp(3rem, 8vh, 5.5rem);
+}
+
+.page-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(70% 95% at 10% 105%, color-mix(in srgb, var(--red) 44%, transparent), transparent 70%),
+    radial-gradient(42% 55% at 92% 0%, color-mix(in srgb, var(--anthracite) 72%, transparent), transparent 75%);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent);
+}
+
+.page-head__title {
+  margin-top: 0.35em;
+  font-size: var(--step-6);
+}
+
+.page-head__lede {
+  max-width: 44ch;
+  margin-top: 1.5rem;
+  color: var(--ivory-soft);
+  font-size: var(--step-1);
+  line-height: 1.55;
+}
+
+/* The ember line: a thread running down every page, lit by scrolling. */
+.ember-line {
+  position: fixed;
+  inset-block: 0;
+  left: calc(var(--gutter) / 2);
+  z-index: var(--z-line);
+  width: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    color-mix(in srgb, var(--gold) 16%, transparent) 14% 86%,
+    transparent
+  );
+  view-transition-name: ember-line;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .ember-line::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, var(--red), var(--fire) 72%, var(--gold));
+      transform: scaleY(0);
+      transform-origin: top;
+      animation: ember-line-grow linear both;
+      animation-timeline: scroll(root block);
+    }
+
+    .ember-line::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--ivory);
+      box-shadow: 0 0 6px 2px var(--fire), 0 0 18px 5px color-mix(in srgb, var(--fire) 55%, transparent);
+      animation: ember-line-glint linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes ember-line-grow {
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes ember-line-glint {
+  to {
+    top: calc(100% - 3px);
+  }
+}

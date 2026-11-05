@@ -1,0 +1,41 @@
+---
+layout: layouts/base.njk
+---
+<article class="post">
+  <header class="wrap post-head">
+    <a class="post-head__back rise" href="/dev-blog/">Dev Blog</a>
+    <p class="post-meta rise" style="--rise-delay: 1">
+      <span class="tag">{{ category }}</span>
+      <time datetime="{{ page.date | isoDate }}">{{ page.date | readableDate }}</time>
+    </p>
+    <h1 class="post-head__title rise" style="--rise-delay: 2">{{ title }}</h1>
+    <div class="ornament rise" style="--rise-delay: 3" aria-hidden="true"><i></i></div>
+    <p class="post-head__lede rise" style="--rise-delay: 4">{{ excerpt }}</p>
+  </header>
+
+  <figure class="wrap post-cover framed rise" style="--rise-delay: 4">
+    {% image cover.src, cover.alt, { widths: [640, 960, 1280, 1600], sizes: "(max-width: 66rem) 100vw, 60rem", eager: true } %}
+    {%- if cover.label %}
+    <figcaption class="media-label">{{ cover.label }}</figcaption>
+    {%- endif %}
+  </figure>
+
+  <div class="post-body">
+    {{ content | safe }}
+    {%- if devNotice %}
+    {%- set noticeTitle = site.firstGame.title %}
+    {% include "partials/dev-notice.njk" %}
+    {%- endif %}
+  </div>
+
+  {%- set newer = collections.posts | getPreviousCollectionItem %}
+  {%- set older = collections.posts | getNextCollectionItem %}
+  <nav class="wrap post-nav" aria-label="More articles">
+    {%- if newer %}
+    <a class="post-nav__link" href="{{ newer.url }}"><span>Newer</span>{{ newer.data.title }}</a>
+    {%- endif %}
+    {%- if older %}
+    <a class="post-nav__link post-nav__link--older" href="{{ older.url }}"><span>Older</span>{{ older.data.title }}</a>
+    {%- endif %}
+  </nav>
+</article>

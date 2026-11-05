@@ -1,0 +1,26 @@
+[
+  {
+    "name": "forest",
+    "label": "Ancient forests",
+    "width": 502,
+    "clip": "polygon(0 0, 100% 0, 48.6% 100%, 0 100%)"
+  },
+  {
+    "name": "monolith",
+    "label": "Impossible architecture",
+    "width": 580,
+    "clip": "polygon(44.48% 0, 100% 0, 55.52% 100%, 0 100%)"
+  },
+  {
+    "name": "kingdom",
+    "label": "Floating kingdoms",
+    "width": 679,
+    "clip": "polygon(38% 0, 100% 0, 62% 100%, 0 100%)"
+  },
+  {
+    "name": "frontier",
+    "label": "Distant frontiers",
+    "width": 444,
+    "clip": "polygon(58.1% 0, 100% 0, 100% 100%, 0 100%)"
+  }
+]

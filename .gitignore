@@ -1,0 +1,8 @@
+node_modules/
+_site/
+
+# High-resolution originals stay private: the repository will be public.
+brand-source/
+
+# Internal notes: rights tracking and unreleased game details must never go public.
+private/

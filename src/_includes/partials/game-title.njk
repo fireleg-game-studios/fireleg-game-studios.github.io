@@ -1,0 +1,8 @@
+{#- First word small, the rest large, as on the studio's game key art. Expects `gameName`. -#}
+{%- set titleWords = gameName.split(" ") -%}
+{%- if titleWords.length > 1 -%}
+<span class="game-title__small">{{ titleWords[0] }}</span>
+<span class="game-title__large">{{ titleWords.slice(1).join(" ") }}</span>
+{%- else -%}
+<span class="game-title__large">{{ gameName }}</span>
+{%- endif -%}

@@ -1,0 +1,50 @@
+---
+layout: layouts/page.njk
+title: Style guide
+eyebrow: Dev only, never published
+lede: The building blocks of the site, in one place.
+permalink: /styleguide/
+---
+<section class="section">
+  <div class="wrap">
+    <h2>Palette</h2>
+    <div class="sg-block sg-swatches">
+      {%- for color in [
+        { name: "Black", hex: "#0B0B0D" },
+        { name: "Dark red", hex: "#8B0D0D" },
+        { name: "Fire orange", hex: "#FF4A00" },
+        { name: "Ivory", hex: "#E6D9C2" },
+        { name: "Anthracite", hex: "#2A2A2E" },
+        { name: "Antique gold", hex: "#D4A552" }
+      ] %}
+      <div class="sg-swatch">
+        <div class="sg-swatch__chip" style="background: {{ color.hex }}"></div>
+        <span>{{ color.name }}<br>{{ color.hex }}</span>
+      </div>
+      {%- endfor %}
+    </div>
+
+    <h2>Typography</h2>
+    <div class="sg-block">
+      <h1 style="font-size: var(--step-6)">Independent worlds</h1>
+      <h2 style="font-size: var(--step-5)">Unforgettable</h2>
+      <h3 style="font-size: var(--step-4)">Experiences</h3>
+      <h4 style="font-size: var(--step-3)">Cinzel for titles</h4>
+      <p class="eyebrow">Montserrat for labels and interface</p>
+      <div class="prose">
+        <p>Montserrat carries all running text. A studio site is read in small moments, so paragraphs stay short, the line length stays comfortable and ivory never reaches full brightness outside of titles.</p>
+        <p><a href="#main">A text link</a> sits quietly until it is needed.</p>
+      </div>
+    </div>
+
+    <h2>Components</h2>
+    <div class="sg-block">
+      <div class="sg-row">
+        <a class="btn btn--primary" href="#main">Primary action</a>
+        <a class="btn" href="#main">Secondary action</a>
+      </div>
+      <div class="needle" aria-hidden="true"></div>
+      {% placeholder "Any asset we do not have yet", "21 / 9" %}
+    </div>
+  </div>
+</section>

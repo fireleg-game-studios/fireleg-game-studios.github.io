@@ -1,0 +1,273 @@
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: var(--z-header);
+}
+
+/* On a pseudo-element: backdrop-filter on the header itself would trap the
+   fixed mobile panel inside the header's own box. */
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: var(--header-h);
+  border-bottom: 1px solid transparent;
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--black) 72%, transparent), transparent);
+  transition: background-color 320ms ease, border-color 320ms ease;
+}
+
+.site-header.is-scrolled::before {
+  border-bottom-color: var(--hairline);
+  background: color-mix(in srgb, var(--black) 82%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+
+.site-header__bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: var(--header-h);
+  padding-inline: var(--gutter);
+  view-transition-name: site-header;
+}
+
+/* Wordmark */
+.brand {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--ivory);
+  text-decoration: none;
+}
+
+.brand__mark {
+  width: 2.75rem;
+  height: 2.75rem;
+  transition: transform 600ms var(--ease-out);
+}
+
+.brand__mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brand:hover .brand__mark {
+  transform: scale(1.08);
+}
+
+.brand__text {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.2em;
+}
+
+.brand__sub {
+  color: var(--ivory-faint);
+  font-size: 0.56rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.37em;
+  text-transform: uppercase;
+}
+
+/* Desktop links */
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 clamp(1.25rem, 3vw, 2.75rem);
+}
+
+.site-nav a {
+  position: relative;
+  display: block;
+  padding-block: 0.9rem;
+  color: var(--ivory-soft);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  right: 0.24em;
+  bottom: 0.55rem;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), var(--fire));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 480ms var(--ease-out);
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--ivory);
+}
+
+.site-nav a:hover::after,
+.site-nav a[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* Without JavaScript, small screens get the links under the wordmark. */
+@media (max-width: 47.99rem) {
+  .no-js {
+    --header-h: 8.5rem;
+  }
+
+  .no-js .site-header {
+    position: absolute;
+  }
+
+  .no-js .site-header__bar {
+    flex-wrap: wrap;
+    padding-block: 1rem;
+  }
+
+  /* Small screens with JavaScript: full-screen panel */
+  .js .brand,
+  .js .nav-toggle {
+    position: relative;
+    z-index: 2;
+  }
+
+  .js .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0 0.5rem 0.5rem;
+    border: 0;
+    background: none;
+    color: var(--ivory);
+    font: 500 var(--step--2) / 1 var(--font-body);
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .nav-toggle__bars {
+    position: relative;
+    display: block;
+    width: 1.75rem;
+    height: 0.6rem;
+  }
+
+  .nav-toggle__bars i {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--ivory);
+    transition: transform 420ms var(--ease-out), background-color 240ms ease;
+  }
+
+  .nav-toggle__bars i:first-child {
+    top: 0;
+  }
+
+  .nav-toggle__bars i:last-child {
+    bottom: 0;
+  }
+
+  .nav-open .nav-toggle__bars i {
+    background: var(--fire);
+  }
+
+  .nav-open .nav-toggle__bars i:first-child {
+    transform: translateY(0.27rem) rotate(18deg);
+  }
+
+  .nav-open .nav-toggle__bars i:last-child {
+    transform: translateY(-0.27rem) rotate(-18deg);
+  }
+
+  .js .site-nav {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: calc(var(--header-h) + 1rem) var(--gutter) 3rem;
+    overflow-y: auto;
+    background:
+      radial-gradient(90% 55% at 15% 105%, color-mix(in srgb, var(--red) 55%, transparent), transparent 72%),
+      var(--black);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 320ms ease, visibility 0s linear 320ms;
+  }
+
+  .nav-open .site-nav {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 320ms ease;
+  }
+
+  .js .site-nav ul {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .js .site-nav li {
+    border-bottom: 1px solid var(--hairline);
+    opacity: 0;
+    transform: translateX(-1rem);
+    transition: opacity 500ms ease, transform 700ms var(--ease-out);
+    transition-delay: calc(var(--i) * 55ms + 60ms);
+  }
+
+  .nav-open .site-nav li {
+    opacity: 1;
+    transform: none;
+  }
+
+  .js .site-nav a {
+    padding-block: 1.15rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 8.5vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: var(--tracking-display);
+    text-transform: none;
+  }
+
+  .js .site-nav a::after {
+    display: none;
+  }
+
+  .js .site-nav a[aria-current="page"] {
+    color: var(--fire);
+  }
+}
+
+@media (max-width: 22rem) {
+  .brand__sub {
+    letter-spacing: 0.28em;
+  }
+
+  .nav-toggle__label {
+    display: none;
+  }
+}

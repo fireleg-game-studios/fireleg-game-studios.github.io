@@ -1,0 +1,43 @@
+---
+layout: layouts/base.njk
+title: Our Games
+lede: Original games, built with passion.
+description: The games of FIRELEG GAME STUDIOS, starting with MANOR VERBIER.
+futureSlots: 3
+---
+<div class="page-shell">
+  <div class="page-ambient" aria-hidden="true">
+    {% image "home/world-forest.webp", "", { widths: [502], sizes: "100vw" } %}
+  </div>
+
+  <header class="page-head page-head--center">
+    <div class="wrap">
+      <h1 class="page-head__title rise">{{ title }}</h1>
+      <p class="page-head__lede rise" style="--rise-delay: 1">{{ lede }}</p>
+    </div>
+  </header>
+
+  <section class="wrap games-list" aria-label="Our games">
+    {% asyncEach game in collections.games %}
+    {%- set cardHeading = "h2" -%}
+    {%- set cardText = game.data.summary -%}
+    {% include "partials/game-card.njk" %}
+    {%- if game.data.devNotice %}
+    {%- set noticeTitle = game.data.title %}
+    {% include "partials/dev-notice.njk" %}
+    {%- endif %}
+    {% endeach %}
+  </section>
+
+  <section class="wrap future" aria-labelledby="future-title">
+    <h2 class="future__title" id="future-title" data-reveal>Future projects</h2>
+    <ul class="future__grid">
+      {%- for slot in range(0, futureSlots) %}
+      <li class="future-slot" data-reveal style="--reveal-delay: {{ loop.index0 }}">
+        <span class="future-slot__plus" aria-hidden="true"></span>
+        More games to come
+      </li>
+      {%- endfor %}
+    </ul>
+  </section>
+</div>

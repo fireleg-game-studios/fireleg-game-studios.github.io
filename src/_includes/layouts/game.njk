@@ -1,0 +1,82 @@
+---
+layout: layouts/base.njk
+---
+{%- set gameName = title %}
+<article class="game-page" style="--accent: {{ accent }}">
+  <header class="game-hero">
+    <div class="game-hero__media" aria-hidden="true">
+      {% image hero.src, "", { widths: [960, 1600], sizes: "100vw", eager: true } %}
+    </div>
+    <div class="wrap game-hero__content">
+      <p class="eyebrow eyebrow--center rise">{{ kicker }}</p>
+      <h1 class="game-title game-title--page rise" style="--rise-delay: 1">{% include "partials/game-title.njk" %}</h1>
+      <div class="ornament rise" style="--rise-delay: 2" aria-hidden="true"><i></i></div>
+      <p class="game-hero__tagline rise" style="--rise-delay: 3">{{ tagline }}</p>
+    </div>
+    <span class="media-label media-label--corner">{{ hero.label }}</span>
+  </header>
+
+  <section class="section game-story" aria-labelledby="story-title">
+    <div class="wrap game-story__grid">
+      <figure class="framed" data-reveal>
+        {% image cover.src, cover.alt, { widths: [640, 960, 1280, 1600], sizes: "(max-width: 52rem) 100vw, 40rem" } %}
+        <figcaption class="media-label">{{ cover.label }}</figcaption>
+      </figure>
+      <div class="game-story__text" data-reveal style="--reveal-delay: 1">
+        <h2 class="section-title" id="story-title">The story</h2>
+        <div class="ornament ornament--start" aria-hidden="true"><i></i></div>
+        {{ content | safe }}
+      </div>
+    </div>
+  </section>
+
+  <section class="section game-features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 class="section-title section-title--center" id="features-title" data-reveal>The experience</h2>
+      <ul class="features">
+        {%- for feature in features %}
+        <li class="feature" data-reveal style="--reveal-delay: {{ loop.index0 % 2 }}">
+          <span class="feature__icon">{% set iconName = feature.icon %}{% include "partials/icon.njk" %}</span>
+          <div>
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.text }}</p>
+          </div>
+        </li>
+        {%- endfor %}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section game-gallery" aria-labelledby="gallery-title">
+    <div class="wrap">
+      <h2 class="section-title section-title--center" id="gallery-title" data-reveal>Inside the manor</h2>
+      <ul class="gallery">
+        {% asyncEach shot in gallery %}
+        <li class="gallery__item{% if shot.wide %} gallery__item--wide{% endif %}" data-reveal>{% galleryImage shot.src, shot.alt, shot.wide %}</li>
+        {% endeach %}
+      </ul>
+      <p class="game-gallery__note">In-game captures, work in progress.</p>
+    </div>
+  </section>
+
+  <section class="section game-close" aria-label="Game details">
+    <div class="wrap game-close__grid">
+      <dl class="facts" data-reveal>
+        {%- for fact in facts %}
+        <div><dt>{{ fact.label }}</dt><dd>{{ fact.value }}</dd></div>
+        {%- endfor %}
+      </dl>
+      <div class="game-close__actions" data-reveal style="--reveal-delay: 1">
+        <p class="game-close__note">{{ note }}</p>
+        <a class="btn btn--gold" href="/dev-blog/">Follow development {% include "partials/arrow.njk" %}</a>
+        <a class="game-close__back" href="/games/">All games</a>
+      </div>
+    </div>
+    {%- if devNotice %}
+    {%- set noticeTitle = title %}
+    <div class="wrap game-close__notice" data-reveal>
+      {% include "partials/dev-notice.njk" %}
+    </div>
+    {%- endif %}
+  </section>
+</article>

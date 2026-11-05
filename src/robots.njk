@@ -1,0 +1,16 @@
+---
+permalink: /robots.txt
+eleventyExcludeFromCollections: true
+---
+{%- if site.preview -%}
+# Preview build: not meant to be indexed yet.
+User-agent: *
+Disallow: /
+{%- else -%}
+User-agent: *
+Allow: /
+{%- if site.url %}
+
+Sitemap: {{ site.url }}/sitemap.xml
+{%- endif -%}
+{%- endif %}

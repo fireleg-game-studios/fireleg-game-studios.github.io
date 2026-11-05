@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: About Us
+lede: A passionate and independent game studio.
+description: FIRELEG GAME STUDIOS is an independent video game studio dedicated to creating original, immersive and memorable experiences.
+permalink: /about/
+pillars:
+  - icon: gamepad
+    title: Our Studio
+    text: "{studio} is an independent game studio dedicated to creating original, immersive and memorable experiences."
+  - icon: mountains
+    title: Our Vision
+    text: To build rich and meaningful worlds, tell powerful stories and offer unique gameplay experiences to players around the world.
+  - icon: flame
+    title: Our Philosophy
+    text: Independence, creativity and passion. We craft the games we truly want to play, with care and ambition.
+  - icon: compass
+    title: Our Ambitions
+    text: To explore many genres and settings, starting with {game}, and to grow a body of work that stays entirely our own.
+---
+<section class="scene-page" aria-labelledby="about-title">
+  <div class="scene-page__scene" aria-hidden="true">
+    {% image "about/banner-hall.webp", "", { widths: [960, 1600, 2240, 2880], sizes: "100vw", eager: true } %}
+  </div>
+
+  <div class="scene-page__content">
+    <header class="scene-page__head">
+      <h1 class="scene-page__title rise" id="about-title">{{ title }}</h1>
+      <p class="scene-page__lede rise" style="--rise-delay: 1">{{ lede }}</p>
+    </header>
+
+    <ul class="scene-page__list">
+      {%- for item in pillars %}
+      <li class="scene-item rise" style="--rise-delay: {{ loop.index0 + 2 }}">
+        <span class="scene-item__icon">{% set iconName = item.icon %}{% include "partials/icon.njk" %}</span>
+        <div>
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.text | replace("{studio}", site.name) | replace("{game}", site.firstGame.title) }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+
+    <p class="scene-page__actions rise" style="--rise-delay: 6">
+      <a class="btn btn--gold" href="/games/">Discover our games {% include "partials/arrow.njk" %}</a>
+      <a class="scene-page__link" href="/discord/">Join our Discord</a>
+    </p>
+  </div>
+</section>

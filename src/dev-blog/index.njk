@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+title: Dev Blog
+lede: Development news, updates and behind the scenes.
+description: News, screenshots and progress from the making of the games of FIRELEG GAME STUDIOS.
+---
+{%- set featured = collections.posts | featuredPost -%}
+<div class="page-shell">
+  <div class="page-ambient" aria-hidden="true">
+    {% image "home/world-forest.webp", "", { widths: [502], sizes: "100vw" } %}
+  </div>
+
+  <header class="page-head page-head--center">
+    <div class="wrap">
+      <h1 class="page-head__title rise">{{ title }}</h1>
+      <p class="page-head__lede rise" style="--rise-delay: 1">{{ lede }}</p>
+    </div>
+  </header>
+
+  <div class="wrap blog">
+    <article class="post-feature" data-reveal style="--cover-position: {{ featured.data.cover.position or 'center' }}">
+      <a class="post-feature__media" href="{{ featured.url }}" tabindex="-1" aria-hidden="true">
+        {% image featured.data.cover.src, "", { widths: [640, 960, 1280, 1600], sizes: "(max-width: 52rem) 100vw, 40rem" } %}
+      </a>
+      <div class="post-feature__body">
+        <p class="post-meta">
+          <span class="tag">{{ featured.data.category }}</span>
+          <time datetime="{{ featured.date | isoDate }}">{{ featured.date | readableDate }}</time>
+        </p>
+        <h2 class="post-feature__title">{{ featured.data.title }}</h2>
+        <p class="post-feature__excerpt">{{ featured.data.excerpt }}</p>
+        <a class="btn btn--gold" href="{{ featured.url }}" aria-label="Read more: {{ featured.data.title }}">
+          Read more
+          {% include "partials/arrow.njk" %}
+        </a>
+      </div>
+    </article>
+
+    <div class="post-grid">
+      {% asyncEach post in collections.posts | except(featured) %}
+      {% include "partials/post-card.njk" %}
+      {% endeach %}
+    </div>
+  </div>
+</div>

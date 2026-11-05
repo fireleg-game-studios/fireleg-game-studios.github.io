@@ -1,0 +1,53 @@
+:root {
+  color-scheme: dark;
+
+  /* Official palette. Do not change these six values. */
+  --black: #0b0b0d;
+  --red: #8b0d0d; /* Decorative only: too dark for text on black. */
+  --fire: #ff4a00;
+  --ivory: #e6d9c2;
+  --anthracite: #2a2a2e;
+  --gold: #d4a552;
+
+  /* Derived from the palette */
+  --ivory-soft: color-mix(in srgb, var(--ivory) 78%, var(--black));
+  --ivory-faint: color-mix(in srgb, var(--ivory) 58%, var(--black));
+  --hairline: color-mix(in srgb, var(--gold) 26%, transparent);
+  --hairline-strong: color-mix(in srgb, var(--gold) 55%, transparent);
+  --surface: color-mix(in srgb, var(--anthracite) 42%, var(--black));
+
+  /* Type */
+  --font-display: "Cinzel Variable", "Cinzel", Georgia, "Times New Roman", serif;
+  --font-body: "Montserrat Variable", "Montserrat", system-ui, "Segoe UI", sans-serif;
+
+  --step--2: clamp(0.69rem, 0.67rem + 0.1vw, 0.75rem);
+  --step--1: clamp(0.8rem, 0.78rem + 0.12vw, 0.875rem);
+  --step-0: clamp(1rem, 0.97rem + 0.16vw, 1.0625rem);
+  --step-1: clamp(1.2rem, 1.13rem + 0.33vw, 1.4rem);
+  --step-2: clamp(1.44rem, 1.31rem + 0.64vw, 1.875rem);
+  --step-3: clamp(1.73rem, 1.5rem + 1.13vw, 2.5rem);
+  --step-4: clamp(2.07rem, 1.7rem + 1.85vw, 3.4rem);
+  --step-5: clamp(2.49rem, 1.85rem + 3.2vw, 4.75rem);
+  --step-6: clamp(2.98rem, 1.9rem + 5.4vw, 6.75rem);
+
+  --tracking-label: 0.26em;
+  --tracking-display: 0.06em;
+
+  /* Layout */
+  --gutter: clamp(1.5rem, 6vw, 6rem);
+  --wrap: 78rem;
+  --measure: 62ch;
+  --header-h: 4.75rem;
+  --section-space: clamp(4.5rem, 11vw, 9.5rem);
+  --cut: 0.8rem; /* Angled corner, taken from the diagonal cuts of the banner. */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration: 420ms;
+
+  /* Layers */
+  --z-line: 5;
+  --z-header: 50;
+  --z-flag: 60;
+}

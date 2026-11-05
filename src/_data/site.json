@@ -1,0 +1,30 @@
+{
+  "name": "FIRELEG GAME STUDIOS",
+  "shortName": "FIRELEG",
+  "subName": "Game Studios",
+  "slogan": ["Independent worlds.", "Unforgettable experiences."],
+  "description": "FIRELEG GAME STUDIOS is an independent video game studio building original worlds and unforgettable experiences across genres.",
+  "lang": "en",
+  "url": "https://fireleg-game-studios.github.io",
+  "preview": false,
+  "firstGame": {
+    "title": "MANOR VERBIER"
+  },
+  "discord": {
+    "url": "https://discord.gg/sDVTuBTaVQ"
+  },
+  "social": [
+    { "label": "Steam", "url": "" },
+    { "label": "YouTube", "url": "" },
+    { "label": "X", "url": "" },
+    { "label": "Instagram", "url": "" },
+    { "label": "TikTok", "url": "" }
+  ],
+  "nav": [
+    { "label": "Home", "href": "/" },
+    { "label": "Games", "href": "/games/" },
+    { "label": "Dev Blog", "href": "/dev-blog/" },
+    { "label": "About", "href": "/about/" },
+    { "label": "Discord", "href": "/discord/" }
+  ]
+}

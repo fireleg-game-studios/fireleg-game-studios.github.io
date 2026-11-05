@@ -1,0 +1,264 @@
+/* Small uppercase label above a title */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9em;
+  margin: 0;
+  color: var(--gold);
+  font-size: var(--step--2);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  flex: none;
+  width: 2.5em;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--fire));
+}
+
+/* Horizontal divider: the flare at the foot of the emblem */
+.needle {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hairline) 16%,
+    var(--gold) 50%,
+    var(--hairline) 84%,
+    transparent
+  );
+}
+
+.needle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(18rem, 40%);
+  height: 3px;
+  background: radial-gradient(closest-side, var(--fire), transparent);
+  transform: translate(-50%, -50%);
+}
+
+/* Button with the banner's angled corners */
+.btn {
+  --btn-bg: var(--black);
+  --btn-frame: var(--hairline-strong);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9em;
+  min-height: 3.25rem;
+  padding: 0.85rem 2rem;
+  background: var(--btn-frame);
+  color: var(--ivory);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  text-transform: uppercase;
+  clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  transition: background-color 240ms ease, color 240ms ease;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background:
+    linear-gradient(100deg, color-mix(in srgb, var(--fire) 26%, transparent), transparent 62%) no-repeat 0 0 / 0% 100%,
+    var(--btn-bg);
+  clip-path: inherit;
+  transition: background-size 480ms var(--ease-out);
+}
+
+.btn:hover {
+  --btn-frame: var(--fire);
+  color: var(--ivory);
+}
+
+.btn:hover::before {
+  background-size: 100% 100%, auto;
+}
+
+.btn--primary {
+  --btn-bg: color-mix(in srgb, var(--red) 62%, var(--black));
+  --btn-frame: var(--fire);
+}
+
+.btn--gold {
+  gap: 1.1em;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.5rem;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: #e9d9b6;
+  clip-path: none;
+  transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease;
+}
+
+.btn--gold::before {
+  display: none;
+}
+
+.btn--gold:hover {
+  border-color: #e9d9b6;
+  background: color-mix(in srgb, var(--gold) 16%, transparent);
+  color: var(--ivory);
+}
+
+.btn__arrow {
+  width: 1.35em;
+  height: auto;
+  transition: transform 400ms var(--ease-out);
+}
+
+.btn:hover .btn__arrow {
+  transform: translateX(0.25em);
+}
+
+/* Stands in for an asset that does not exist yet. Must never reach production. */
+.placeholder {
+  position: relative;
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  border: 1px dashed var(--hairline-strong);
+  background:
+    repeating-linear-gradient(135deg, transparent 0 14px, color-mix(in srgb, var(--anthracite) 38%, transparent) 14px 15px),
+    var(--surface);
+  text-align: center;
+}
+
+.placeholder__tag {
+  color: var(--fire);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.placeholder__label {
+  color: var(--ivory-soft);
+  font-size: var(--step--1);
+}
+
+.placeholder-note {
+  max-width: var(--measure);
+  margin-top: 1.5rem;
+  color: var(--ivory-faint);
+  font-size: var(--step--1);
+}
+
+/* Shown while site.preview is true */
+.preview-flag {
+  position: fixed;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: var(--z-flag);
+  padding: 0.35rem 0.7rem;
+  border: 1px dashed var(--fire);
+  background: var(--black);
+  color: var(--ivory);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+body:has(.preview-flag) .site-footer {
+  padding-bottom: 4.5rem;
+}
+
+/* Style guide (dev only) */
+.sg-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+  gap: 1rem;
+}
+
+.sg-swatch {
+  display: grid;
+  gap: 0.6rem;
+  font-size: var(--step--1);
+  line-height: 1.4;
+}
+
+.sg-swatch__chip {
+  height: 6rem;
+  border: 1px solid var(--hairline);
+}
+
+.sg-block {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 4.5rem;
+}
+
+.sg-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* The official notice on a game still in development: present, but quiet. */
+.dev-notice {
+  width: 100%;
+  max-width: 48rem;
+  margin-inline: auto;
+  padding: 1.25rem 0.25rem;
+  border-top: 1px solid var(--hairline-strong);
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ivory-faint);
+  font-size: var(--step--1);
+  line-height: 1.7;
+  text-align: center;
+}
+
+.dev-notice p {
+  margin: 0 0 0.55em;
+}
+
+.dev-notice p:last-child {
+  margin-bottom: 0;
+}
+
+.dev-notice .dev-notice__title {
+  margin-bottom: 0.8em;
+  color: var(--gold);
+  font-size: var(--step--2);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
+.game-close__notice {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.post-body .dev-notice {
+  margin-top: 3rem;
+}
+
+/* Text links that sit alone on a line: a comfortable target for a thumb, the line itself unchanged. */
+.first-project__more a,
+.scene-page__link,
+.post-head__back,
+.game-close__back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}

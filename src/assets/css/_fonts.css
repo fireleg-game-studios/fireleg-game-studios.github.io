@@ -1,0 +1,16 @@
+/* Official typefaces from the brand sheet. Licence: SIL OFL 1.1 (see /assets/fonts/). */
+@font-face {
+  font-family: "Cinzel Variable";
+  src: url("../fonts/cinzel-latin-wght-normal.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat Variable";
+  src: url("../fonts/montserrat-latin-wght-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

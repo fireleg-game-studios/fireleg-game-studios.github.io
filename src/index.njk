@@ -1,0 +1,108 @@
+---
+layout: layouts/base.njk
+title: Home
+---
+<section class="opening" data-opening aria-labelledby="opening-title">
+  <div class="opening__bg" aria-hidden="true">
+    {% image "home/opening-bg.webp", "", { widths: [960, 1672], sizes: "100vw", eager: true } %}
+  </div>
+  <canvas class="opening__embers" data-embers aria-hidden="true"></canvas>
+
+  <div class="opening__stage">
+    <h1 class="lockup" id="opening-title">
+      <span class="lockup__emblem">
+        {% image "brand/lockup-emblem.webp", "", { widths: [375, 750], sizes: "(max-width: 48rem) 80vw, 36rem", eager: true } %}
+      </span>
+      <span class="lockup__wordmark">
+        {% image "brand/lockup-wordmark.webp", site.name, { widths: [550, 1100], sizes: "(max-width: 48rem) 90vw, 52rem", eager: true } %}
+      </span>
+    </h1>
+    <p class="opening__slogan">{% for line in site.slogan %}<span>{{ line }}</span> {% endfor %}</p>
+  </div>
+
+  <a class="opening__cue" href="#studio">
+    <span>Enter</span>
+    <i aria-hidden="true"></i>
+  </a>
+</section>
+
+<section class="manifesto" id="studio" aria-labelledby="manifesto-title">
+  <div class="manifesto__emblem" aria-hidden="true">
+    {% image "brand/emblem.webp", "", { widths: [800, 1254], sizes: "(max-width: 48rem) 120vw, 52rem" } %}
+  </div>
+
+  <div class="wrap">
+    <p class="eyebrow" data-reveal>The studio</p>
+    <h2 class="manifesto__title" id="manifesto-title" data-reveal style="--reveal-delay: 1">We build worlds worth getting lost in.</h2>
+    <div class="manifesto__text" data-reveal style="--reveal-delay: 2">
+      <p>{{ site.name }} is an independent video game studio, and we refuse to be defined by a single genre.</p>
+      <p>Every project starts with one question: what should this world make you feel? Everything else follows from the answer, from the rules of play to the light on the walls.</p>
+    </div>
+
+    <ol class="pillars">
+      <li class="pillar" data-reveal>
+        <span class="pillar__number" aria-hidden="true">I</span>
+        <h3>Original game worlds</h3>
+        <p>Our places, our characters, our stories. Nothing borrowed, everything built for the game it belongs to.</p>
+      </li>
+      <li class="pillar" data-reveal style="--reveal-delay: 1">
+        <span class="pillar__number" aria-hidden="true">II</span>
+        <h3>Immersive experiences</h3>
+        <p>We care most about what players feel without noticing: sound, light, pacing. The details that make a place real.</p>
+      </li>
+      <li class="pillar" data-reveal style="--reveal-delay: 2">
+        <span class="pillar__number" aria-hidden="true">III</span>
+        <h3>Independent by design</h3>
+        <p>We answer to our players and to our own standards, which leaves us free to follow the ideas that deserve it.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="first-project" aria-labelledby="first-project-title">
+  <div class="first-project__ambient" aria-hidden="true">
+    {% image "games/manor-verbier/grand-hall.webp", "", { widths: [768, 1200, 1600], sizes: "100vw" } %}
+  </div>
+  <div class="wrap">
+    <h2 class="first-project__title" id="first-project-title" data-reveal>Our first game</h2>
+    {%- set game = collections.games[0] -%}
+    {%- set cardHeading = "h3" -%}
+    {%- set cardText = game.data.teaser -%}
+    {% include "partials/game-card.njk" %}
+    <p class="first-project__more" data-reveal>
+      <a href="/games/">All games</a>
+      <a href="/dev-blog/">Read the dev blog</a>
+    </p>
+  </div>
+</section>
+
+<section class="worlds" aria-labelledby="worlds-title">
+  <div class="wrap worlds__head">
+    <p class="eyebrow" data-reveal>Our universe</p>
+    <h2 class="worlds__title" id="worlds-title" data-reveal style="--reveal-delay: 1">One studio. Many worlds.</h2>
+    <p class="worlds__lede" data-reveal style="--reveal-delay: 2">{{ site.firstGame.title }} is where we begin, not where we stop. We want to explore many genres and settings, each with an identity of its own.</p>
+  </div>
+
+  <div class="worlds__viewport" tabindex="0" role="group" aria-label="Concept art of the worlds the studio wants to explore">
+    <ul class="worlds__track">
+      {% asyncEach world in worlds %}
+      <li class="world" style="--w: {{ world.width }}; --clip: {{ world.clip }}">
+        {% image "home/world-" + world.name + ".webp", "", { widths: [world.width], sizes: "(max-width: 64rem) 80vw, 40vw" } %}
+        <p class="world__label">{{ world.label }}</p>
+      </li>
+      {% endeach %}
+      <li class="worlds__edges" aria-hidden="true">
+        <svg viewBox="0 0 1431 480" preserveAspectRatio="none" focusable="false">
+          <line x1="502" y1="0" x2="244" y2="480"/>
+          <line x1="824" y1="0" x2="566" y2="480"/>
+          <line x1="1245" y1="0" x2="987" y2="480"/>
+        </svg>
+      </li>
+    </ul>
+  </div>
+
+  <div class="wrap worlds__notes">
+    <p class="worlds__hint" aria-hidden="true">Swipe to explore</p>
+    <p class="worlds__note">Studio concept art. These images show our ambition, not announced games.</p>
+  </div>
+</section>

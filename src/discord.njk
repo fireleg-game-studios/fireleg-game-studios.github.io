@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: Join Our Discord
+lede: The home of our community, and the best place to reach the studio.
+description: Join the FIRELEG GAME STUDIOS community on Discord. Follow development, talk to the studio and meet other players.
+permalink: /discord/
+pillars:
+  - icon: flame
+    title: Follow Development
+    text: News, screenshots and progress from the making of {game}.
+  - icon: chat
+    title: Talk to the Studio
+    text: Ask your questions, share your ideas and tell us what you think. This is also the place to reach us.
+  - icon: gamepad
+    title: Meet Other Players
+    text: Meet people who share your taste for original worlds.
+---
+<section class="scene-page scene-page--mirror" aria-labelledby="discord-title">
+  <div class="scene-page__scene" aria-hidden="true">
+    {% image "about/window-hall.webp", "", { widths: [960, 1600, 2240, 2580], sizes: "100vw", eager: true } %}
+  </div>
+
+  <div class="scene-page__content">
+    <header class="scene-page__head">
+      <h1 class="scene-page__title rise" id="discord-title">{{ title }}</h1>
+      <p class="scene-page__lede rise" style="--rise-delay: 1">{{ lede }}</p>
+    </header>
+
+    <ul class="scene-page__list">
+      {%- for item in pillars %}
+      <li class="scene-item rise" style="--rise-delay: {{ loop.index0 + 2 }}">
+        <span class="scene-item__icon">{% set iconName = item.icon %}{% include "partials/icon.njk" %}</span>
+        <div>
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.text | replace("{game}", site.firstGame.title) }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ul>
+
+    <div class="scene-page__actions rise" style="--rise-delay: 5">
+      {%- if site.discord.url %}
+      <a class="btn btn--gold" href="{{ site.discord.url }}" rel="noopener" target="_blank">Join the Discord {% include "partials/arrow.njk" %}</a>
+      {%- else %}
+      {% placeholder "Discord invite link", "7 / 1" %}
+      {%- endif %}
+    </div>
+  </div>
+</section>

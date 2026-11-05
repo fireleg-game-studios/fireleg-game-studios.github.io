@@ -1,0 +1,673 @@
+/* ---------- Opening ---------- */
+.opening {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: calc(var(--header-h) + 0.5rem) var(--gutter) 6.5rem;
+  overflow: hidden;
+  text-align: center;
+}
+
+.opening__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  mask-image: linear-gradient(to bottom, #000 72%, transparent);
+}
+
+.opening__bg picture,
+.opening__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.opening__embers {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.opening__stage {
+  width: 100%;
+}
+
+/* The official logo, split in two layers at the exact place the original joins them. */
+.lockup {
+  --lockup-w: min(100%, 52rem, 92svh);
+  position: relative;
+  display: block;
+  width: var(--lockup-w);
+  aspect-ratio: 1100 / 785;
+  margin-inline: auto;
+}
+
+.lockup__emblem,
+.lockup__wordmark {
+  position: absolute;
+  display: block;
+}
+
+.lockup__emblem {
+  top: 0;
+  left: 19.09%;
+  width: 68.18%;
+  transform-origin: 45% 100%;
+}
+
+/* Slow breathing light behind the flames */
+.lockup__emblem::before {
+  content: "";
+  position: absolute;
+  inset: 16% 6% 4%;
+  z-index: -1;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--fire) 24%, transparent), transparent);
+}
+
+.lockup__wordmark {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.lockup img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Softens the flat cut of this layer while the wordmark below is not there yet. */
+.lockup__emblem img {
+  mask-image: linear-gradient(to bottom, #000 98.6%, transparent);
+}
+
+/* The flare at the foot of the emblem, drawn from the centre during the opening. */
+.lockup::after {
+  content: "";
+  position: absolute;
+  top: 74%;
+  left: 12%;
+  width: 76%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold) 30%, var(--ivory) 50%, var(--gold) 70%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.opening__slogan {
+  margin: clamp(1.25rem, 3.5vh, 2.25rem) 0 0;
+  padding-left: 0.34em;
+  color: var(--ivory);
+  font-family: var(--font-display);
+  font-size: clamp(0.72rem, 0.55rem + 0.55vw, 1.05rem);
+  font-weight: 500;
+  line-height: 1.9;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.opening__slogan span {
+  display: inline-block;
+}
+
+/* Scroll cue: the needle of the emblem, continuing down the page. */
+.opening__cue {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: grid;
+  justify-items: center;
+  gap: 0.7rem;
+  padding-inline: 1.25rem;
+  color: var(--ivory-soft);
+  font-size: var(--step--2);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: translateX(-50%);
+}
+
+.opening__cue span {
+  padding-left: var(--tracking-label);
+}
+
+.opening__cue i {
+  position: relative;
+  display: block;
+  width: 1px;
+  height: clamp(2.75rem, 7vh, 4.5rem);
+  overflow: hidden;
+  background: var(--hairline-strong);
+}
+
+.opening__cue i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, var(--fire));
+  transform: translateY(-100%);
+}
+
+/* Portrait screens: the emblem gets more presence above the wordmark, and the
+   background sits low, because cropping it to the centre would only keep its empty middle. */
+@media (max-aspect-ratio: 4 / 5) {
+  .lockup {
+    margin-top: 26%;
+  }
+
+  .lockup__emblem {
+    scale: 1.3;
+    transform-origin: 45% 100%;
+  }
+
+  .opening__bg {
+    mask-image: none;
+  }
+
+  .opening__bg picture {
+    position: absolute;
+    bottom: 0;
+    left: -22%;
+    width: 144%;
+    height: auto;
+    aspect-ratio: 1672 / 941;
+    mask-image: linear-gradient(to bottom, transparent, #000 45%);
+  }
+}
+
+/* ---------- Manifesto ---------- */
+.manifesto {
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--section-space);
+  overflow: clip;
+}
+
+.manifesto__emblem {
+  position: absolute;
+  top: 2%;
+  right: -9rem;
+  z-index: -1;
+  width: min(120vw, 52rem);
+  opacity: 0.13;
+  mask-image: radial-gradient(closest-side, #000 62%, transparent);
+  pointer-events: none;
+}
+
+.manifesto__emblem img {
+  width: 100%;
+  height: auto;
+}
+
+.manifesto__title {
+  max-width: 13em;
+  margin-top: 1.5rem;
+  font-size: var(--step-5);
+}
+
+.manifesto__text {
+  max-width: 34rem;
+  margin-top: clamp(2rem, 5vw, 3.5rem);
+  margin-left: clamp(0rem, 24vw - 6rem, 18rem);
+  font-size: var(--step-1);
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.pillars {
+  display: grid;
+  gap: 2.75rem;
+  margin: clamp(4rem, 9vw, 7.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 52rem) {
+  .pillars {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+}
+
+.pillar {
+  position: relative;
+  padding-top: 1.75rem;
+  font-size: var(--step--1);
+  line-height: 1.75;
+}
+
+/* Hairline that ignites as the column enters the screen */
+.pillar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--fire), var(--gold) 35%, var(--hairline));
+  transform-origin: left;
+  transition: transform 1400ms var(--ease-out);
+  transition-delay: calc(var(--reveal-delay, 0) * 90ms + 150ms);
+}
+
+.js .pillar:not(.is-in)::before {
+  transform: scaleX(0);
+}
+
+.pillar__number {
+  display: block;
+  margin-bottom: 1rem;
+  color: var(--gold);
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  line-height: 1;
+}
+
+.pillar h3 {
+  margin-bottom: 0.85rem;
+  font-size: var(--step-2);
+}
+
+/* ---------- First project ---------- */
+.first-project {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(4rem, 9vw, 7rem) clamp(3rem, 6vw, 4.5rem);
+}
+
+.first-project__ambient {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.3;
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 62%, transparent);
+  pointer-events: none;
+}
+
+.first-project__ambient picture,
+.first-project__ambient img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.first-project__ambient img {
+  object-fit: cover;
+}
+
+.first-project__title {
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  background: linear-gradient(to bottom, #e9d9b6, var(--gold) 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-size: var(--step-4);
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.first-project__more {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2.5rem;
+  margin: 1.5rem 0 0;
+  font-size: var(--step--1);
+}
+
+/* ---------- Worlds ---------- */
+.worlds {
+  padding-block: var(--section-space) clamp(3rem, 7vw, 5.5rem);
+}
+
+.worlds__head {
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.worlds__title {
+  margin-top: 1.25rem;
+  font-size: var(--step-5);
+}
+
+.worlds__lede {
+  max-width: 36rem;
+  margin-top: 1.5rem;
+  font-size: var(--step-1);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.worlds__viewport {
+  container-type: inline-size;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.worlds__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+/* All geometry is expressed in banner pixels: the row is 1431 by 480. */
+.worlds__track {
+  --row-h: min(26rem, 68svh);
+  position: relative;
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@container (min-width: 64rem) {
+  .worlds__track {
+    --row-h: calc(100cqw * 480 / 1431);
+    width: 100%;
+  }
+}
+
+.world {
+  position: relative;
+  flex: none;
+  height: var(--row-h);
+  aspect-ratio: var(--w) / 480;
+  margin-left: calc(var(--row-h) * -258 / 480);
+  overflow: hidden;
+  clip-path: var(--clip);
+  scroll-snap-align: center;
+}
+
+.world:first-child {
+  margin-left: 0;
+}
+
+.world picture,
+.world img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.world img {
+  object-fit: cover;
+  transition: transform 1600ms var(--ease-out);
+}
+
+.world::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, transparent 58%, var(--black) 96%);
+}
+
+.world::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--black);
+  opacity: 0.22;
+  transition: opacity 700ms ease;
+}
+
+.world:hover img {
+  transform: scale(1.04);
+}
+
+.world:hover::after {
+  opacity: 0;
+}
+
+.world__label {
+  position: absolute;
+  bottom: clamp(0.9rem, 2.2vw, 1.6rem);
+  left: clamp(2.75rem, 4vw, 3.75rem);
+  z-index: 2;
+  max-width: 50%;
+  margin: 0;
+  color: var(--ivory);
+  font-family: var(--font-display);
+  font-size: var(--step-0);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0.05em;
+}
+
+.world:first-child .world__label {
+  left: var(--gutter);
+  max-width: 42%;
+}
+
+.world:last-of-type .world__label {
+  max-width: 60%;
+}
+
+.worlds__edges {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.worlds__edges svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.worlds__edges line {
+  stroke: var(--gold);
+  stroke-width: 1.25;
+  vector-effect: non-scaling-stroke;
+}
+
+.worlds__notes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 2rem;
+  margin-top: 1.25rem;
+  color: var(--ivory-faint);
+  font-size: var(--step--2);
+  letter-spacing: 0.04em;
+}
+
+.worlds__notes p {
+  margin: 0;
+}
+
+.worlds__hint {
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 64rem) {
+  .worlds__hint {
+    display: none;
+  }
+}
+
+/* ---------- Motion ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .opening__bg {
+    animation: fade-in 2400ms ease 500ms both;
+  }
+
+  .opening__embers {
+    animation: fade-in 2000ms ease 900ms both;
+  }
+
+  .lockup__emblem {
+    animation: ignite 1800ms var(--ease-out) 150ms both;
+  }
+
+  .lockup__emblem::before {
+    animation: breathe 5200ms ease-in-out 2200ms infinite;
+  }
+
+  .lockup::after {
+    animation: flare 1500ms var(--ease-out) 750ms both;
+  }
+
+  .lockup__wordmark {
+    animation: forge 1500ms var(--ease-out) 800ms both;
+  }
+
+  .opening__slogan {
+    animation: rise 1200ms var(--ease-out) 1900ms both;
+  }
+
+  .opening__cue {
+    animation: fade-in 1000ms ease 2600ms both;
+  }
+
+  .opening__cue i::after {
+    animation: cue-fall 2600ms var(--ease-in-out) 2800ms infinite;
+  }
+
+  /* Nothing starts before the hero images are ready: see main.js and the head of base.njk. */
+  .js:not(.opening-ready) .opening *,
+  .js:not(.opening-ready) .opening *::before,
+  .js:not(.opening-ready) .opening *::after,
+  .js:not(.opening-ready) .site-header__bar {
+    animation-play-state: paused;
+  }
+
+  /* The header waits for the opening, the first time only. */
+  html:has(.opening):not(.intro-seen) .site-header__bar {
+    animation: fade-in 1000ms ease 2300ms both;
+  }
+
+  /* Later visits in the same session: a short fade instead of the full sequence. */
+  .intro-seen .opening__bg,
+  .intro-seen .opening__embers,
+  .intro-seen .lockup__emblem,
+  .intro-seen .lockup__wordmark,
+  .intro-seen .opening__slogan,
+  .intro-seen .opening__cue {
+    animation: fade-in 500ms ease both;
+  }
+
+  .intro-seen .lockup::after {
+    animation: none;
+  }
+
+  /* The opening recedes as the page scrolls. Static where unsupported. */
+  @supports (animation-timeline: scroll()) {
+    .opening__stage {
+      animation: stage-recede linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 90svh;
+    }
+
+    .opening__bg img {
+      animation: bg-drift linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 100svh;
+    }
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes ignite {
+  0% {
+    clip-path: circle(0% at 45% 96%);
+    filter: brightness(0.35);
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
+  18% {
+    opacity: 1;
+  }
+
+  65% {
+    clip-path: circle(85% at 45% 96%);
+    filter: brightness(1.3);
+  }
+
+  100% {
+    clip-path: circle(150% at 45% 96%);
+    filter: brightness(1);
+    transform: none;
+  }
+}
+
+@keyframes flare {
+  0% {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes forge {
+  from {
+    clip-path: inset(-10% 50% -10% 50%);
+    opacity: 0;
+  }
+
+  to {
+    clip-path: inset(-10% 0 -10% 0);
+    opacity: 1;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@keyframes cue-fall {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  70%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes stage-recede {
+  to {
+    opacity: 0;
+    transform: translateY(-5vh) scale(0.97);
+  }
+}
+
+@keyframes bg-drift {
+  to {
+    transform: scale(1.08);
+  }
+}

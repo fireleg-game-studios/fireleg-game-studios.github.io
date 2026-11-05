@@ -1,0 +1,4 @@
+{
+  "layout": "layouts/post.njk",
+  "permalink": "/dev-blog/{{ page.fileSlug }}/"
+}

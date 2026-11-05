@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="{{ site.lang }}" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if title and page.url != "/" %}{{ title }} | {% endif %}{{ site.name }}</title>
+  <meta name="description" content="{{ description or site.description }}">
+  <meta name="theme-color" content="#0B0B0D">
+  <meta name="color-scheme" content="dark">
+  {%- if site.preview %}
+  <meta name="robots" content="noindex, nofollow">
+  {%- endif %}
+  {%- if site.url %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  {%- endif %}
+  <link rel="icon" href="/assets/images/brand/icon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/brand/icon-180.png">
+  <meta property="og:site_name" content="{{ site.name }}">
+  <meta property="og:title" content="{% if title and page.url != "/" %}{{ title }} | {% endif %}{{ site.name }}">
+  <meta property="og:description" content="{{ description or site.description }}">
+  <meta property="og:type" content="website">
+  {%- if site.url %}
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:image" content="{{ site.url }}/assets/images/brand/social-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  {%- endif %}
+  <link rel="preload" href="/assets/fonts/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/cinzel-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <script>
+    document.documentElement.className = "js";
+    try {
+      if (sessionStorage.getItem("fireleg-intro")) document.documentElement.classList.add("intro-seen");
+    } catch (error) {}
+    // The opening waits for its images, but never longer than this.
+    setTimeout(function () { document.documentElement.classList.add("opening-ready"); }, 2500);
+  </script>
+  {#- If the script cannot load, the page falls back to its no-JavaScript layout, with everything visible. #}
+  <script type="module" src="/assets/js/main.js" onerror="document.documentElement.className = 'no-js'"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include "partials/header.njk" %}
+  <div class="ember-line" aria-hidden="true"></div>
+  <main id="main" tabindex="-1">
+    {{ content | safe }}
+  </main>
+  {% include "partials/footer.njk" %}
+  {%- if site.preview %}
+  <p class="preview-flag">Preview build: placeholders in use</p>
+  {%- endif %}
+</body>
+</html>

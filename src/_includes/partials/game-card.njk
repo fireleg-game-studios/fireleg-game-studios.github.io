@@ -1,0 +1,19 @@
+{#- The presentation of a game. Expects `game`, `cardHeading` (h2, h3...) and `cardText`. -#}
+{%- set gameName = game.data.title -%}
+<article class="game-card" style="--accent: {{ game.data.accent }}" data-reveal>
+  <a class="game-card__media" href="{{ game.url }}" tabindex="-1" aria-hidden="true">
+    {% image game.data.cover.src, "", { widths: [640, 960, 1280, 1600], sizes: "(max-width: 52rem) 100vw, 44rem" } %}
+    {%- if game.data.cover.label %}
+    <span class="media-label">{{ game.data.cover.label }}</span>
+    {%- endif %}
+  </a>
+  <div class="game-card__body">
+    <{{ cardHeading }} class="game-title">{% include "partials/game-title.njk" %}</{{ cardHeading }}>
+    <div class="ornament" aria-hidden="true"><i></i></div>
+    <p class="game-card__text">{{ cardText }}</p>
+    <a class="btn btn--gold" href="{{ game.url }}" aria-label="Learn more about {{ game.data.title }}">
+      Learn more
+      {% include "partials/arrow.njk" %}
+    </a>
+  </div>
+</article>

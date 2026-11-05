@@ -1,0 +1,62 @@
+/* Page transitions: native in supporting browsers, a plain page load elsewhere. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: page-out 200ms ease both;
+  }
+
+  ::view-transition-new(root) {
+    animation: page-in 520ms var(--ease-out) 60ms both;
+  }
+
+  /* Entrance for what is visible on load: pure CSS, so it can never leave text hidden. */
+  .rise {
+    animation: rise 1000ms var(--ease-out) both;
+    animation-delay: calc(var(--rise-delay, 0) * 90ms);
+  }
+
+  /* Reveal on scroll, for what sits below the fold. Driven by main.js. */
+  [data-reveal] {
+    transition: opacity 900ms ease, transform 1100ms var(--ease-out);
+    transition-delay: calc(var(--reveal-delay, 0) * 90ms);
+  }
+
+  .js [data-reveal]:not(.is-in) {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+  }
+}
