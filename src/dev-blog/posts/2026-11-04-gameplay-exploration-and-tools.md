@@ -34,7 +34,7 @@ The map is a real object in the world. Open it and your character raises a sheet
 
 - **You keep moving,** at a slow walk. You cannot run or jump while reading.
 - **You can still look around.** Your head turns about 34 degrees either way before your body follows, so you can read and watch the corridor at once.
-- **The compass tells the truth.** It is a modelled brass instrument, and its needle points to the real north of the house.
+- **The compass tells the truth.** It is a brass instrument, and its needle points to the real north of the house.
 - **The paper only knows what you know.** A room you have visited is hatched and named. A room you have only seen from its door is hatched, with no name. Everything else does not exist on the sheet yet.
 
 The plan itself is not drawn by hand: it is computed from the game's own layout, down to the doors and the furniture, so the map can never disagree with the house.
