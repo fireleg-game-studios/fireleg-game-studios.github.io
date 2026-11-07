@@ -145,7 +145,11 @@ async function worlds() {
   }
 }
 
-const MANOR_CAPTURES = ["grand-hall", "spotlight", "fireplace", "salon", "chandelier", "staircase", "vestibule", "mirror-hall"];
+// The first four illustrate earlier posts; the others are the latest captures of the showcase.
+const MANOR_CAPTURES = [
+  "grand-hall", "chandelier", "staircase", "vestibule",
+  "hall-medallion", "hall-checker", "hall-vase", "hall-doorway", "library", "library-window", "courtyard", "beam",
+];
 
 async function gameCaptures() {
   for (const name of MANOR_CAPTURES) {
